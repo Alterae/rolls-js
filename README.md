@@ -18,6 +18,12 @@ To build the code, run [`build.sh`](./build.sh). You can also call `tsc` manuall
 -   `typescript`.
 -   Preferably a shell that supports shebangs.
 
+## To Do
+
+- [ ] Turn this into a usable command-line tool.
+- [ ] (Maybe) make it a node module.
+- [ ] (*Big* maybe) put it on npm or something.
+
 ## License
 
 This project is licensed under the MIT license. If for some reason you actually want to hack on it, feel free.
