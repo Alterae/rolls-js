@@ -1,11 +1,14 @@
 import Results from "./types/Results";
 import Dice from "./types/Dice";
 
+/**
+ * Dice notation regex.
+ */
 const regex = /(?:(\d+)\s*X\s*)?(\d*)D(\d*)((?:[+\/*-]\d+)|(?:[+-][LH]))?/i;
 
 /**
  * Rolls a set of dice described in dice notation (AdX+/-B).  If multiple rolls
- * are provided, will only roll the first.
+ * are provided, will curl up in a ball and die.
  *
  * @param dice The dice to roll.
  */
@@ -14,9 +17,11 @@ function roll(dice: string): void {
 }
 
 /**
- * Parses dice notation and returns a `Roll`.
+ * Parses dice notation and returns a `Roll`.  Modifier can be negative, but
+ * both the number of dice to roll and the number of sides must be non-negative
+ * if specified.
  *
- * @param dice The dice roll to parse, in dice notation.
+ * @param dice The dice roll to parse, in dice notation (AdX+/-B).
  *
  * @throws Will throw an error if the dice notation is invalid.
  * @returns A `Roll` parsed from the dice notation.
