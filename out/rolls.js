@@ -1,9 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Dice notation regex.
+ */
 const regex = /(?:(\d+)\s*X\s*)?(\d*)D(\d*)((?:[+\/*-]\d+)|(?:[+-][LH]))?/i;
 /**
  * Rolls a set of dice described in dice notation (AdX+/-B).  If multiple rolls
- * are provided, will only roll the first.
+ * are provided, will curl up in a ball and die.
  *
  * @param dice The dice to roll.
  */
@@ -11,23 +14,31 @@ function roll(dice) {
     console.log(rollDice(parseDice(dice)));
 }
 /**
- * Parses dice notation and returns a `Roll`.
+ * Parses dice notation and returns a `Roll`.  Modifier can be negative, but
+ * both the number of dice to roll and the number of sides must be non-negative
+ * if specified.
  *
- * @param dice The dice roll to parse, in dice notation.
+ * @param dice The dice roll to parse, in dice notation (AdX+/-B).
  *
  * @throws Will throw an error if the dice notation is invalid.
  * @returns A `Roll` parsed from the dice notation.
  */
 function parseDice(dice) {
-    dice = strip(dice);
-    if (dice[0] == "-") {
-        throw new Error(`Invalid dice notation "${dice}".  Cannot roll a negative number of dice.`);
-    }
-    if (!regex.test(dice)) {
-        throw new Error(`Invalid dice notation "${dice}".`);
+    if (/\s+/.test(dice)) {
+        throw new Error(`Invalid dice notation "${dice}".` +
+            "Can only parse one roll at a time.");
     }
     dice = dice.replace("-", "+-");
-    const [rolls, modifier] = dice.split("+");
+    if (hasMultiplePlusses(dice)) {
+        throw new Error(`Invalid dice notation "${dice}." ` +
+            "Cannot roll a negative number of dice, nor dice with a \
+				negative number of sides.");
+    }
+    const match = dice.match(regex)?.[0] ?? "";
+    if (match === "") {
+        throw new Error(`Invalid dice notation: ${dice}.`);
+    }
+    const [rolls, modifier] = match.split("+");
     const [num, sides] = rolls.split("d");
     return {
         num: toIntOr(num, 1),
@@ -65,16 +76,6 @@ function rollDie(sides) {
     return Math.ceil(Math.random() * sides);
 }
 /**
- * Strips all whitespace from a string.
- *
- * @param str The string to strip.
- *
- * @returns The stripped string.
- */
-function strip(str) {
-    return str.split(/\s+/).join();
-}
-/**
  * Attempts to parse its input to an integer, and returns the fallback value if
  * parsing is not possible.
  *
@@ -85,4 +86,15 @@ function strip(str) {
  */
 function toIntOr(str, fallback) {
     return isNaN(parseInt(str)) ? fallback : parseInt(str);
+}
+/**
+ * Check if the given string has more than one plus sign (`+`) in it.
+ *
+ * @param str The string to check.
+ *
+ * @returns `False` if the number of plus signs in the string is 0 or 1, `True`
+ * otherwise.
+ */
+function hasMultiplePlusses(str) {
+    return (str.match(/\+/g) ?? []).length > 1;
 }

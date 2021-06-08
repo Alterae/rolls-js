@@ -27,21 +27,29 @@ function roll(dice: string): void {
  * @returns A `Roll` parsed from the dice notation.
  */
 function parseDice(dice: string): Dice {
-	dice = dice.match(regex)?.[0] ?? "";
-
-	if (dice[0] == "-") {
+	if (/\s+/.test(dice)) {
 		throw new Error(
-			`Invalid dice notation "${dice}".  Cannot roll a negative number of dice.`
+			`Invalid dice notation "${dice}".` +
+				"Can only parse one roll at a time."
 		);
 	}
 
-	if (!regex.test(dice)) {
-		throw new Error(`Invalid dice notation "${dice}".`);
+	dice = dice.replace("-", "+-");
+	if (hasMultiplePlusses(dice)) {
+		throw new Error(
+			`Invalid dice notation "${dice}." ` +
+				"Cannot roll a negative number of dice, nor dice with a \
+				negative number of sides."
+		);
 	}
 
-	dice = dice.replace("-", "+-");
+	const match = dice.match(regex)?.[0] ?? "";
+	if (match === "") {
+		throw new Error(`Invalid dice notation: ${dice}.`);
+	}
 
-	const [rolls, modifier] = dice.split("+");
+	const [rolls, modifier] = match.split("+");
+
 	const [num, sides] = rolls.split("d");
 
 	return {
@@ -94,4 +102,16 @@ function rollDie(sides: number): number {
  */
 function toIntOr(str: string, fallback: number): number {
 	return isNaN(parseInt(str)) ? fallback : parseInt(str);
+}
+
+/**
+ * Check if the given string has more than one plus sign (`+`) in it.
+ *
+ * @param str The string to check.
+ *
+ * @returns `False` if the number of plus signs in the string is 0 or 1, `True`
+ * otherwise.
+ */
+function hasMultiplePlusses(str: string): boolean {
+	return (str.match(/\+/g) ?? []).length > 1;
 }
