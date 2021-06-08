@@ -2,7 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const regex = /(?:(\d+)\s*X\s*)?(\d*)D(\d*)((?:[+\/*-]\d+)|(?:[+-][LH]))?/i;
 /**
- * Rolls a set of dice described in dice notation (AdX+/-B).
+ * Rolls a set of dice described in dice notation (AdX+/-B).  If multiple rolls
+ * are provided, will only roll the first.
  *
  * @param dice The dice to roll.
  */
