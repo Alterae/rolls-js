@@ -91,7 +91,7 @@ function rollDie(sides: number): number {
  * @returns The stripped string.
  */
 function strip(str: string): string {
-	return str.split(/\s+/).join();
+	return str.split(/\s+/).join("");
 }
 
 /**
