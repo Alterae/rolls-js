@@ -2,6 +2,9 @@
 
 A typescript/javascript thing for rolling dice.
 
+> **⚠️ NOTE:**
+> Please do not actually use this code. It is terrible and I need to rewrite it to not be terrible. The purpose of this project was to learn and it served that purpose, but it is not actually very useful.
+
 ## Usage
 
 I honestly don't know. I guess you could import it into your own project? But it isn't a node module so good luck with that.
