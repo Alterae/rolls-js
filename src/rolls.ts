@@ -13,7 +13,11 @@ const regex = /(?:(\d+)\s*X\s*)?(\d*)D(\d*)((?:[+\/*-]\d+)|(?:[+-][LH]))?/i;
  * @param dice The dice to roll.
  */
 function roll(dice: string): void {
-	console.log(rollDice(parseDice(dice)));
+	const rolls = dice.split(/\s+/);
+
+	for (const r of rolls) {
+		console.log(rollDice(parseDice(r)));
+	}
 }
 
 /**
