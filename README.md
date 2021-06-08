@@ -8,9 +8,18 @@ I honestly don't know. I guess you could import it into your own project? But it
 
 Read the documentation comments to find out how things work.
 
-You can run the code by running [`run.sh`](./run.sh) or by running [`out/rolls.js`](./out/rolls.js) either via `node` or (in shells that support shebangs) directly.
+To run the code:
 
-To build the code, run [`build.sh`](./build.sh). You can also call `tsc` manually, but then the output script won't be directly runnable.
+```console
+node ./out/rolls.js
+```
+
+To compile the typescript:
+
+```console
+tsc
+
+```
 
 ## Dependencies
 
