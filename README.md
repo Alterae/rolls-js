@@ -25,13 +25,12 @@ tsc
 
 -   `node`.
 -   `typescript`.
--   Preferably a shell that supports shebangs.
 
 ## To Do
 
-- [ ] Turn this into a usable command-line tool.
-- [ ] (Maybe) make it a node module.
-- [ ] (*Big* maybe) put it on npm or something.
+-   [ ] Turn this into a usable command-line tool.
+-   [ ] (Maybe) make it a node module.
+-   [ ] (_Big_ maybe) put it on npm or something.
 
 ## License
 
