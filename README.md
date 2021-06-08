@@ -28,8 +28,10 @@ tsc
 ## To Do
 
 -   [ ] Turn this into a usable command-line tool.
--   [ ] (Maybe) make it a node module.
--   [ ] (_Big_ maybe) put it on npm or something.
+-   [ ] Clean up the API (and make it an actual API).
+-   [ ] Clean up the internal structure.
+-   [ ] Maybe make it a node module.
+-   [ ] _Big_ maybe put it on npm or something.
 
 ## License
 
