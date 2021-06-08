@@ -27,7 +27,7 @@ function roll(dice: string): void {
  * @returns A `Roll` parsed from the dice notation.
  */
 function parseDice(dice: string): Dice {
-	dice = strip(dice);
+	dice = dice.match(regex)?.[0] ?? "";
 
 	if (dice[0] == "-") {
 		throw new Error(
@@ -81,17 +81,6 @@ function rollDice(dice: Dice): Results {
  */
 function rollDie(sides: number): number {
 	return Math.ceil(Math.random() * sides);
-}
-
-/**
- * Strips all whitespace from a string.
- *
- * @param str The string to strip.
- *
- * @returns The stripped string.
- */
-function strip(str: string): string {
-	return str.split(/\s+/).join("");
 }
 
 /**
