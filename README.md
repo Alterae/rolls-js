@@ -18,7 +18,6 @@ To compile the typescript:
 
 ```console
 tsc
-
 ```
 
 ## Dependencies
